@@ -1,6 +1,6 @@
 __My project idea:__ An app called "Overheard" (or something more creative; to be decided later)
 
-__Programming language:__ Python (using the Flask framework - Flask helps build lightweight)
+__Programming language:__ Python (with Flask or Streamlit)
 
 __Idea__:
 There are several pages on Instagram and websites like "Overheard in New York" or "Overheard in London", and I thought it would be cool to make this into an 
