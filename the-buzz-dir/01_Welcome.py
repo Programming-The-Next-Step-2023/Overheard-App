@@ -10,18 +10,14 @@
 
 # Libraries
 import streamlit as st
-import pandas as pd
-import numpy as np
 import requests
-import pycountry
 from PIL import Image
 # from config import NEWS_API_KEY
 from streamlit import secrets
-from summarizer import Summarizer,TransformerSummarizer
 from functions import get_all_news
 from datetime import datetime, date, timedelta
 
-# =============st===================================================================================
+# ================================================================================================
 
 # Title, header, instructions: -----------------------
 

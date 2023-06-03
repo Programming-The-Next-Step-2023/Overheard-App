@@ -63,16 +63,14 @@ with col2:
 
 st.markdown("*Due to NewsAPI limitations, you can only search for news up to a month back.*")
 
+# slider / select_slider
+range_top = st.slider('How many articles do you want?', 0, 10)
+
 
 # ================================================================================================
 
 ## FUNCTION from functions.py
 from functions import get_top_headlines
-
-# slider / select_slider
-range_top = st.slider('How many articles do you want?', 0, 10)
-
-agree = st.checkbox('I agree with the terms and conditions')
 
 button2 = st.button('Enter')
 if button2:
