@@ -31,23 +31,28 @@ language_mapping = {
 
 ## INPUTS ---------------------------------------------------
 
-st.markdown("*You must enter a date range and language in which you want articles. In addition to these, you can optionally add keywords, countries and categories (you may add either 1, 2 or all 3 of these.)*")
+st.markdown("##### Here you can check for top headlines or breaking news according to your search.")
 
-# User inputs
-keyword_top = st.text_input('Keyword (optional)')
-# country_name = st.text_input('Country (optional)')
-# country = pycountry.countries.get(name=country_name).alpha_2
+st.markdown("*You must enter a date range and language in which you want articles. In addition to these, you can optionally add keywords and categories (you may add either one or both of these)*")
+
+# User inputs ------
+
+# Keyword will be found in either the body or title of the article
+keyword_top = st.text_input('Keyword (optional)') 
+
+# Category choices (as given in the News API)
 category_options = [''] + ['business', 'entertainment', 'general', 'health', 'science', 'sport', 'technology']
 category = st.selectbox('Choose Category (optional)', category_options)
-user_choice_language_top = st.selectbox('Select Language*', ['German', 'English', 'Spanish','French', 'Italian', 'Portugese', 'Dutch'])  # User selects language from the dropdown
 
+# Language
+user_choice_language_top = st.selectbox('Select Language*', ['German', 'English', 'Spanish','French', 'Italian', 'Portugese', 'Dutch'])  # User selects language from the dropdown
 # Convert user input to the corresponding NewsAPI language value
 language_top = language_mapping.get(user_choice_language_top.lower())
 
+# Dates
 today = date.today()
 min_date_top = today - timedelta(days=30)
 
-st.text('Date range should be in the current month!')
 col1, col2 = st.columns(2)
 
 with col1:
@@ -55,6 +60,8 @@ with col1:
 
 with col2:
     to_date_top = st.date_input('To which date', min_value=min_date_top, max_value=today, value=today)
+
+st.markdown("*Due to NewsAPI limitations, you can only search for news up to a month back.*")
 
 
 # ================================================================================================
