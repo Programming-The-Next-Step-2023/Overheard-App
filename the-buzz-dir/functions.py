@@ -33,7 +33,7 @@ def get_all_news(keyword, language, from_date, to_date, range_articles, sort_by)
 
         
     Returns:
-        list: A list of news articles (extracted based on the parameters) in JSON format
+        list: A list of news articles (extracted based on the arguments) in JSON format
 
     """
     
@@ -85,7 +85,7 @@ def get_top_headlines(keyword_top, category, language_top, from_date_top, to_dat
 
         
     Returns:
-        list: A list of top headline articles (extracted based on the parameters) in JSON format
+        list: A list of top headline articles (extracted based on the arguments) in JSON format. 
 
     """
     # NewsAPI 'top headlines' endpoint url and parameters:

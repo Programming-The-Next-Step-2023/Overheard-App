@@ -30,7 +30,7 @@ title = st.markdown("# THE BUZZ")
 header = st.subheader("A home-grown news app")
 
 # Instructions
-st.markdown('*Here you can check for all news. If you specifically want __Top Headlines__, go to the next page from the sidebar!*')
+st.markdown('###### Here you can check for all news. If you specifically want __Top Headlines__, go to the next page from the sidebar!')
 
 # ================================================================================================
 
@@ -61,13 +61,14 @@ from functions import get_all_news
 
 # Keyword: ------
 keyword = st.text_input('Keyword*')
-st.markdown("*You may also use more keywords by joining them using AND and OR.*")
+st.markdown("*You have to enter a keyword. You may also use more keywords by joining them using AND and OR to optimise your search. (e.g. Erdogan AND elections / Biden OR Trump)*")
 
 user_choice_language = st.selectbox('Select Language*', ['German', 'English', 'Spanish','French', 'Italian', 'Portugese', 'Dutch'])
 language = language_mapping.get(user_choice_language.lower())
 
 # Sort by: ------
 sort_by = st.selectbox('Articles sorted by/according to: (optional)', ['', 'relevancy', 'popularity', 'publishedAt'])
+st.markdown("*Note: Relevancy is how relevant the article is to the keyword*")
 
 # Date: ------
 # maximum allowed date (one month ago from today - News API limitations :))
@@ -89,8 +90,7 @@ st.markdown("*Due to NewsAPI limitations, you can only search for news up to a m
 range_articles = st.slider('How many articles do you want?', 0, 10)
 
 # T&C:
-agree = st.checkbox('I agree with the terms and conditions*')
-st.write("Find T & C at the bottom of the page")
+agree = st.checkbox('I agree with the terms and conditions (scroll to the bottom of the page).*')
 
 ## ==================================================================================
 
@@ -133,3 +133,19 @@ if button1:
                         st.write("No image available.")
                     st.write(article['content'])
                     st.markdown(f"[Read full article]({article['url']})")
+
+st.write("  ")
+st.write("  ")
+st.write("  ")
+st.write("  ")
+st.write("  ")
+st.write("  ")
+st.write("  ")
+st.write("  ")
+st.write("  ")
+st.write("  ")
+
+
+## Terms and Conditions ------------------
+st.markdown('#### Terms and Conditions')
+st.write("Please agree not to request more than 10 articles in total (in all your searches) so that other people can also use this app! Due to API restrictions, only a limited number of articles can be requested per day.")
