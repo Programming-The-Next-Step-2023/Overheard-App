@@ -15,5 +15,6 @@ All my main code is in the `the-buzz-dir` folder. Here is a small run through of
 
 If there are any issues, suggestions or fixes required for the app, you can contact me here: https://the-buzz.streamlit.app/Contact
 
-- Nitya Shah,
+-----------------------
+Nitya Shah,
 University of Amsterdam
