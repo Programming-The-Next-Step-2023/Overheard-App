@@ -22,19 +22,14 @@ from datetime import datetime, date, timedelta
 
 # =============st===================================================================================
 
-## DISPLAYING TEXT ---------------------------------------------------
-# title / header / subheader / text / caption / code / text / markdown
+# Title, header, instructions: -----------------------
 
-# Giving the app a title
-
+# Giving the app a title, sub-header
 title = st.markdown("# THE BUZZ")
 header = st.subheader("A home-grown news app")
+
+# Instructions
 st.markdown('*Here you can check for all news. If you specifically want __Top Headlines__, go to the next page from the sidebar!*')
-# st.text('raw text')
-# st.caption('caption')
-# st.code('hfjkdckjdckjs')
-# st.markdown('<h3>This is a normal writing<h3>', unsafe_allow_html=True)
-# st.write('Normal writing')
 
 # ================================================================================================
 
@@ -63,12 +58,17 @@ from functions import get_all_news
 
 ## INPUTS ---------------------------------------------------
 
-# User inputs -----------------------------------------------------------------------------
-keyword = st.text_input('Keyword')
-user_choice_language = st.selectbox('Select Language', ['German', 'English', 'Spanish','French', 'Italian', 'Portugese', 'Dutch'])
-language = language_mapping.get(user_choice_language.lower())
-sort_by = st.selectbox('Articles sorted by/according to:', ['', 'relevancy', 'popularity', 'publishedAt'])
+# Keyword: ------
+keyword = st.text_input('Keyword*')
+st.markdown("*You may also use more keywords by joining them using AND and OR.*")
 
+user_choice_language = st.selectbox('Select Language*', ['German', 'English', 'Spanish','French', 'Italian', 'Portugese', 'Dutch'])
+language = language_mapping.get(user_choice_language.lower())
+
+# Sort by: ------
+sort_by = st.selectbox('Articles sorted by/according to: (optional)', ['', 'relevancy', 'popularity', 'publishedAt'])
+
+# Date: ------
 # maximum allowed date (one month ago from today - News API limitations :))
 today = date.today()
 min_date = today - timedelta(days=30) # from
@@ -82,8 +82,14 @@ with col1:
 with col2:
     to_date = st.date_input('To which date', min_value=min_date, max_value=max_date, value=max_date)
 
+st.markdown("*Due to NewsAPI limitations, you can only search for news up to a month back.*")
+
+# Article number: ----
 range_articles = st.slider('How many articles do you want?', 0, 10)
-agree = st.checkbox('I agree with the terms and conditions')
+
+# T&C:
+agree = st.checkbox('I agree with the terms and conditions*')
+st.write("Find T & C at the bottom of the page")
 
 ## ==================================================================================
 
@@ -91,19 +97,38 @@ agree = st.checkbox('I agree with the terms and conditions')
 
 button1 = st.button('Enter')
 if button1:
-    if keyword and language:
-        articles = get_all_news(keyword, language, from_date, to_date, range_articles, sort_by)
-        for article in articles:
-            st.header(article['title'])
-            st.write("Published at:", article['publishedAt'])
-            st.write(article['source']['name'])
-            if 'urlToImage' in article and article['urlToImage']:
-                try:
-                    image = Image.open(requests.get(article['urlToImage'], stream=True).raw)
-                    st.image(article['urlToImage'])
-                except:
-                    st.write("Unable to display image.")
+
+    # catching error (#1): users need to agree to terms and conditions
+    if not agree:
+        st.error("Please agree to the terms and conditions.")
+
+    # catching error (#2): users need to enter keyword
+    if agree:
+        if not keyword:
+            st.error("Please enter a keyword to proceed and get news!")
+
+        else:
+            articles = get_all_news(keyword, language, from_date, to_date, range_articles, sort_by)
+            
+            # if nothing shows up / there is an issue:
+            if not articles:
+                st.write("No articles found for the provided keyword.")
+                st.write("1. Please check that the keyword is in the language you want the news article in.")
+                st.write("2. If that does not work, then there probably have been too many news requests today, and you will have to try again tomorrow! Sorry!")
+                
+            # else print articles as usual:
             else:
-                st.write("No image available.")
-            st.write(article['content'])
-            st.markdown(f"[Read full article]({article['url']})")
+                for article in articles:
+                    st.header(article['title'])
+                    st.write("Published at:", article['publishedAt'])
+                    st.write(article['source']['name'])
+                    if 'urlToImage' in article and article['urlToImage']:
+                        try:
+                            image = Image.open(requests.get(article['urlToImage'], stream=True).raw)
+                            st.image(article['urlToImage'])
+                        except:
+                            st.write("Unable to display image.")
+                    else:
+                        st.write("No image available.")
+                    st.write(article['content'])
+                    st.markdown(f"[Read full article]({article['url']})")
