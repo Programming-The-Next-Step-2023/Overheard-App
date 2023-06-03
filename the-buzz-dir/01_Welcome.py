@@ -3,7 +3,8 @@
 # pip3 install requests
 # pip3 install pycountry
 
-# To run app, type in terminal: streamlit run whatsnew_source.py
+## Note: To run app, type in terminal:
+    # streamlit run the-buzz-dir/01_Welcome.py
 
 # ================================================================================================
 
