@@ -3,22 +3,6 @@
 # pip3 install requests
 # pip3 install pycountry
 
-## FOR SUMMARISER
-# xcode-select --install
-# pip install --upgrade pip setuptools
-# pip install cytoolz
-# pip install cymem
-# pip install murmurhash
-# pip install preshed
-# pip install thinc
-# pip install spacy
-# !pip install spacy==2.0.12
-# !pip install transformers==2.2.0
-# !pip install bert-extractive-summarizer
-# pip3 install torch torchvision
-# pip install --upgrade transformers
-
-
 # To run app, type in terminal: streamlit run whatsnew_source.py
 
 # ================================================================================================
