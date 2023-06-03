@@ -1,5 +1,4 @@
 import streamlit as st
-import smtplib
 
 st.markdown("# Send me your comments!")
 
